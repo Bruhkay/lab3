@@ -10,10 +10,8 @@ public class OneBot extends Robot {
     @Override
     public void attack(Simulation s) {
         System.out.println(this.getName() + " attacks "+ s.getLowestHealth(!this.getIsRedTeam()).getName() );
-        if(s.getLowestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
-            s.remove(s.getLowestHealth(!this.getIsRedTeam()));
-            s.getLowestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
-        }  
+        
+        s.damageToBot(s.getLowestHealth(!this.getIsRedTeam()), this.ATTACK); 
     }
     
 }

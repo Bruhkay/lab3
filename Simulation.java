@@ -56,7 +56,7 @@ public class Simulation {
         }
     }
     public Robot getLowestSpeed(boolean isRedTeam){
-        double lowestSpeed = 0;
+        double lowestSpeed = 10;
         for (Robot robot : robotList) {
             if(robot.isRedTeam == isRedTeam){
                 if(lowestSpeed > robot.getSPEED()){
@@ -74,17 +74,17 @@ public class Simulation {
         return null;
     }
     public Robot getLowestAttack(boolean isRedTeam){
-        double lowestHealth = 0;
+        double lowestAttack = 10;
         for (Robot robot : robotList) {
             if(robot.isRedTeam == isRedTeam){
-                if(lowestHealth > robot.getHEALTH()){
-                    lowestHealth = robot.getHEALTH();
+                if(lowestAttack > robot.getATTACK()){
+                    lowestAttack = robot.getATTACK();
                 }
             }
         }
         for (Robot robot : robotList) {
             if(robot.isRedTeam == isRedTeam){
-                if(lowestHealth == robot.getHEALTH()){
+                if(lowestAttack == robot.getATTACK()){
                     return robot;
                 }
             }
@@ -111,7 +111,7 @@ public class Simulation {
         
     }
     public Robot getLowestHealth(boolean isRedTeam){
-        double lowestHealth = 0;
+        double lowestHealth = 10;
         for (Robot robot : robotList) {
             if(robot.isRedTeam == isRedTeam){
                 if(lowestHealth > robot.getHEALTH()){
@@ -130,25 +130,74 @@ public class Simulation {
         
     }
     public Robot[] getLowestSpeed3(boolean isRedTeam){
-        Robot[] x = new Robot[3];
+        
+        ArrayList<Robot> temp = new ArrayList<Robot>();
+        Robot[] x;
+
         for (Robot k : robotList) {
             if(k.isRedTeam == isRedTeam){
-                    
-                if(k.getSPEED()< x[0].getSPEED()){
-                    x[2]=x[1];
-                    x[1]=x[0];
-                    x[0] = k;
-                }
-                else if(k.getSPEED()< x[1].getSPEED()){
-                    x[2]=x[1];
-                    x[1]=k;
-                }
-                else if(k.getSPEED()< x[2].getSPEED()){
-                    x[2]=k;
-                }
+                temp.add(k);
             }
         }
-        return x;
+
+        if(temp.size()>=3){
+            x = new Robot[3];
+            for (int h = 0; h<3; h++) {
+                x[h]=temp.get(h);
+            }
+            for (Robot k : temp) {
+                if(k.isRedTeam == isRedTeam){
+                        
+                    if(k.getSPEED()< x[0].getSPEED()){
+                        x[2]=x[1];
+                        x[1]=x[0];
+                        x[0] = k;
+                    }
+                    else if(k.getSPEED()< x[1].getSPEED()){
+                        x[2]=x[1];
+                        x[1]=k;
+                    }
+                    else if(k.getSPEED()< x[2].getSPEED()){
+                        x[0]=k;
+                    }
+                }
+            }
+            return x;
+        }
+        else if(temp.size() == 2){
+            x = new Robot[2];
+            for (int h = 0; h<2; h++) {
+                x[h]=temp.get(h);
+            }
+            for (Robot k : temp) {
+                if(k.isRedTeam == isRedTeam){
+                        
+                    if(k.getSPEED()< x[0].getSPEED()){
+                        x[1]=x[0];
+                        x[0]= k;
+                    }
+                    else if(k.getSPEED()< x[1].getSPEED()){
+                        x[0]=k;
+                    }
+                }
+            }
+            return x;
+        }
+        else if(temp.size() == 1){
+            x = new Robot[1];
+            for (int h = 0; h<1; h++) {
+                x[h]=temp.get(h);
+            }
+            for (Robot k : temp) {
+                if(k.isRedTeam == isRedTeam){
+                    if(k.getSPEED()< x[0].getSPEED()){
+                        x[0]= k;
+                    }
+                }
+            }
+            return x;
+        }
+        return null;
     }
     public void listAll(){
         //bigger to smaller
@@ -193,5 +242,18 @@ public class Simulation {
             }
         }
         robotList.remove(index);
+    }
+    public void damageToBot(Robot r, double damage){
+        for(int i = 0; i < robotList.size(); i++){
+            if(r.getName().equals(robotList.get(i).getName())){
+                if(robotList.get(i).getHitAnfIsDestroyed(damage)){
+                    this.remove(r);
+                }
+                else{
+                    robotList.get(i).getHitAnfIsDestroyed(damage);
+                }
+            }
+            
+        }
     }
 }

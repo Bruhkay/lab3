@@ -11,10 +11,8 @@ public class DefenceBot extends Robot {
     @Override
     public void attack(Simulation s) {
         System.out.println(this.getName() + " attacks "+ s.getLowestSpeed(!this.getIsRedTeam()).getName() );
-        if(s.getLowestSpeed(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
-            s.remove(s.getLowestSpeed(!this.getIsRedTeam()));
-            s.getLowestSpeed(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
-        }  
+        
+        s.damageToBot(s.getLowestSpeed(!this.getIsRedTeam()), this.ATTACK); 
          
     }
     

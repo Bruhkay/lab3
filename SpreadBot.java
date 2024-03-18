@@ -17,8 +17,8 @@ public class SpreadBot extends Robot {
         System.out.println();
 
         for (int i =0; i < s.getLowestSpeed3(!this.getIsRedTeam()).length ; i++) {
-            s.getLowestSpeed3(!this.getIsRedTeam())[i].getHitAnfIsDestroyed(ATTACK);
-            s.remove(s.getLowestSpeed3(!this.getIsRedTeam())[i]);
+            
+            s.damageToBot(s.getLowestSpeed3(!this.getIsRedTeam())[i], this.ATTACK); 
         }
     }
     

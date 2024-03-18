@@ -10,10 +10,8 @@ public class SpeedBot extends Robot{
     @Override
     public void attack(Simulation s) {
         System.out.println(this.getName() + " attacks "+ s.getLowestAttack(!this.getIsRedTeam()).getName() );
-        if(s.getLowestAttack(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
-            s.remove(s.getLowestAttack(!this.getIsRedTeam()));
-            s.getLowestAttack(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
-        }  
+        
+        s.damageToBot(s.getLowestAttack(!this.getIsRedTeam()), this.ATTACK); 
     }
     
 }

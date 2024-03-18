@@ -9,11 +9,9 @@ public class SimpleBot extends Robot {
     }
     @Override
     public void attack(Simulation s) {
-        System.out.println(this.getName() + " attacks "+ s.getRandomTarget(!this.getIsRedTeam()).getName() );
-        if(s.getRandomTarget(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
-            s.remove(s.getRandomTarget(!this.getIsRedTeam()));
-            s.getRandomTarget(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
-        }  
+        Robot r = s.getRandomTarget(!this.getIsRedTeam());
+        System.out.println(this.getName() + " attacks "+ r.getName() );
+        s.damageToBot(r, this.ATTACK);
     }
     
 }

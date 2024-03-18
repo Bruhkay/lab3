@@ -10,10 +10,8 @@ public class PredatorBot extends Robot {
     @Override
     public void attack(Simulation s) {
         System.out.println(this.getName() + " attacks "+ s.getHighestHealth(!this.getIsRedTeam()).getName() );
-        if(s.getHighestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
-        s.remove(s.getHighestHealth(!this.getIsRedTeam()));
-        s.getHighestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
-    }  
+        
+        s.damageToBot(s.getHighestHealth(!this.getIsRedTeam()), this.ATTACK); 
         
     }
     
