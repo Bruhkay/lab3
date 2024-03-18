@@ -12,12 +12,15 @@ public abstract class Robot {
 
     public boolean getHitAnfIsDestroyed(double damage){
         if(HEALTH<= damage){ 
-            HEALTH =0;
-            
+            this.HEALTH =0;
+            System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
+            "receives ", damage," damage -> remaining health: ", HEALTH);
             return true;
         }
         else{
             HEALTH = HEALTH - damage;
+            System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
+            "receives ", damage," damage -> remaining health: ", HEALTH);
             return false;
         }
     }
