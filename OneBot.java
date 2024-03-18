@@ -1,15 +1,19 @@
 public class OneBot extends Robot {
-    OneBot(){
+    OneBot(boolean isRedTeam){
         this.setHEALTH(Math.random()/2);
         this.setATTACK(Math.random()+4);
         this.setSPEED(Math.random()/2);
         this.setName("O"+ getID());
+        this.setRedTeam(isRedTeam);
         setID();
     }
     @Override
     public void attack(Simulation s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        System.out.println(this.getName() + " attacks "+ s.getLowestHealth(!this.getIsRedTeam()).getName() );
+        if(s.getLowestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK)){
+            s.remove(s.getLowestHealth(!this.getIsRedTeam()));
+            s.getLowestHealth(!this.getIsRedTeam()).getHitAnfIsDestroyed(this.ATTACK);
+        }  
     }
     
 }

@@ -11,13 +11,18 @@ public abstract class Robot {
     public abstract void attack(Simulation s);
 
     public boolean getHitAnfIsDestroyed(double damage){
-        if(true){ 
-            return false;
-        }
-        else{
+        if(HEALTH<= damage){ 
+            HEALTH =0;
+            
             return true;
         }
+        else{
+            HEALTH = HEALTH - damage;
+            return false;
+        }
     }
+
+
     public void setATTACK(double aTTACK) {
         ATTACK = aTTACK;
     }
@@ -45,10 +50,13 @@ public abstract class Robot {
     public double getSPEED() {
         return SPEED;
     }
-    public static int getID() {
+    public int getID() {
         return ID;
     }
-    public static void setID() {
+    public void setID() {
         ID++;
+    }
+    public boolean getIsRedTeam(){
+        return isRedTeam;
     }
 }
