@@ -12,16 +12,22 @@ public abstract class Robot {
 
     public boolean getHitAnfIsDestroyed(double damage){
         if(HEALTH<= damage){ 
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void decreaseHealth(double damage){
+        if(HEALTH<= damage){ 
             this.HEALTH =0;
             System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
             "receives ", damage," damage -> remaining health: ", HEALTH);
-            return true;
         }
         else{
             HEALTH = HEALTH - damage;
             System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
             "receives ", damage," damage -> remaining health: ", HEALTH);
-            return false;
         }
     }
 
@@ -61,5 +67,9 @@ public abstract class Robot {
     }
     public boolean getIsRedTeam(){
         return isRedTeam;
+    }
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

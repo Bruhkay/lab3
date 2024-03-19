@@ -132,72 +132,56 @@ public class Simulation {
     public Robot[] getLowestSpeed3(boolean isRedTeam){
         
         ArrayList<Robot> temp = new ArrayList<Robot>();
-        Robot[] x;
 
         for (Robot k : robotList) {
             if(k.isRedTeam == isRedTeam){
                 temp.add(k);
             }
         }
+        
+        
 
         if(temp.size()>=3){
-            x = new Robot[3];
-            for (int h = 0; h<3; h++) {
-                x[h]=temp.get(h);
+            Robot[] lowestThree = new Robot[3];
+
+            for (int i = 0; i < 3; i++) {
+                lowestThree[i] = temp.get(i);
             }
-            for (Robot k : temp) {
-                if(k.isRedTeam == isRedTeam){
-                        
-                    if(k.getSPEED()< x[0].getSPEED()){
-                        x[2]=x[1];
-                        x[1]=x[0];
-                        x[0] = k;
-                    }
-                    else if(k.getSPEED()< x[1].getSPEED()){
-                        x[2]=x[1];
-                        x[1]=k;
-                    }
-                    else if(k.getSPEED()< x[2].getSPEED()){
-                        x[0]=k;
+
+            for (int i = 3; i < temp.size(); i++) {
+                Robot currentRobot = temp.get(i);
+                for (int j = 0; j < 3; j++) {
+                    if (currentRobot.getSPEED() < lowestThree[j].getSPEED()) {
+                        for (int k = 2; k > j; k--) {
+                            lowestThree[k] = lowestThree[k - 1];
+                        }
+                        lowestThree[j] = currentRobot;
+                        break;
                     }
                 }
             }
-            return x;
+            return lowestThree;
         }
-        else if(temp.size() == 2){
-            x = new Robot[2];
-            for (int h = 0; h<2; h++) {
-                x[h]=temp.get(h);
+        else{
+            Robot[] lowestThree = new Robot[temp.size()];
+
+            for (int i = 0; i < temp.size(); i++) {
+                lowestThree[i] = temp.get(i);
             }
-            for (Robot k : temp) {
-                if(k.isRedTeam == isRedTeam){
-                        
-                    if(k.getSPEED()< x[0].getSPEED()){
-                        x[1]=x[0];
-                        x[0]= k;
-                    }
-                    else if(k.getSPEED()< x[1].getSPEED()){
-                        x[0]=k;
-                    }
-                }
-            }
-            return x;
-        }
-        else if(temp.size() == 1){
-            x = new Robot[1];
-            for (int h = 0; h<1; h++) {
-                x[h]=temp.get(h);
-            }
-            for (Robot k : temp) {
-                if(k.isRedTeam == isRedTeam){
-                    if(k.getSPEED()< x[0].getSPEED()){
-                        x[0]= k;
+            for (int i = 3; i < temp.size(); i++) {
+                Robot currentRobot = temp.get(i);
+                for (int j = 0; j < temp.size(); j++) {
+                    if (currentRobot.getSPEED() < lowestThree[j].getSPEED()) {
+                        for (int k = 2; k > j; k--) {
+                            lowestThree[k] = lowestThree[k - 1];
+                        }
+                        lowestThree[j] = currentRobot;
+                        break;
                     }
                 }
             }
-            return x;
+            return lowestThree;
         }
-        return null;
     }
     public void listAll(){
         //bigger to smaller
@@ -247,13 +231,13 @@ public class Simulation {
         for(int i = 0; i < robotList.size(); i++){
             if(r.getName().equals(robotList.get(i).getName())){
                 if(robotList.get(i).getHitAnfIsDestroyed(damage)){
+                    robotList.get(i).decreaseHealth(damage);
                     this.remove(r);
                 }
                 else{
-                    robotList.get(i).getHitAnfIsDestroyed(damage);
+                    robotList.get(i).decreaseHealth(damage);
                 }
             }
-            
         }
     }
 }

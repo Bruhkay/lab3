@@ -31,6 +31,13 @@ public class tester {
                 if(numberBlue ==0 || numberRed ==0){
                     isGameFinished = true;
                     System.out.println("game finished");
+                    s.listAll();
+                    if(numberBlue==0){
+                        System.out.println("Red team wins");
+                    }
+                    else{
+                        System.out.println("Blue team wins");
+                    }
                 }
             }
             
