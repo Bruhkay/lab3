@@ -207,11 +207,11 @@ public class Simulation {
         System.out.printf("%s%.3f\n","\nSpeed sum of Blue : ", blueSum);
         System.out.println();
 
-        if(redSum> blueSum){
+        if(redSum>= blueSum && blueSum !=0){
             System.out.println("Red starts first");
             this.starter = 0;
         }
-        else{
+        else if(blueSum > redSum && redSum !=0){
             this.starter = 1;
             System.out.println("Blue starts first");
         }
