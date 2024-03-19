@@ -9,7 +9,11 @@ public abstract class Robot {
      
 
     public abstract void attack(Simulation s);
-
+    /**
+     * 
+     * @param damage
+     * @return if machine is demolished, this will return true
+     */
     public boolean getHitAnfIsDestroyed(double damage){
         if(HEALTH<= damage){ 
             return true;
@@ -18,6 +22,10 @@ public abstract class Robot {
             return false;
         }
     }
+    /**
+     * this method decreases health according to taking damage
+     * @param damage is the amount of attackers attack point
+     */
     public void decreaseHealth(double damage){
         if(HEALTH<= damage){ 
             this.HEALTH =0;
