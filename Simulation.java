@@ -62,6 +62,7 @@ public class Simulation {
                 }
             }
         }
+        robotList.add(temp.get(0));
     }
     /**
      * this method returns random robot 

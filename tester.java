@@ -1,9 +1,13 @@
+import java.util.Scanner;
 public class tester {
     public static void main(String[] args) {
         Simulation s = new Simulation();
         boolean isGameFinished = false;
         int turn;
-        s.initialize(5);
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Team size; ");
+        int number = in.nextInt();
+        s.initialize(number);
         s.listAll();
         turn = s.starter;
         while(!isGameFinished){

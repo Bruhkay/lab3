@@ -30,12 +30,12 @@ public abstract class Robot {
         if(HEALTH<= damage){ 
             this.HEALTH =0;
             System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
-            "receives ", damage," damage -> remaining health: ", HEALTH);
+            " receives ", damage," damage -> remaining health: ", HEALTH);
         }
         else{
             HEALTH = HEALTH - damage;
             System.out.printf("%s%s%.3f%s%.3f\n",this.getName(), 
-            "receives ", damage," damage -> remaining health: ", HEALTH);
+            " receives ", damage," damage -> remaining health: ", HEALTH);
         }
     }
 
